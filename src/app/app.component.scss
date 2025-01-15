@@ -1,0 +1,40 @@
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+}
+
+.content-area {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+fg-header {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+}
+
+fg-footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+}
+
+fg-side-panel {
+    width: 200px;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+}
+
+fg-content {
+    background-color: #ffffff;
+}
+
