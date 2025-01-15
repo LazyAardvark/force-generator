@@ -400,4 +400,4 @@ FodyWeavers.xsd
 *.sln.iml
 
 #Angular cache is not needed in history 
-/.angular/cache
+.angular/cache

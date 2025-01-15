@@ -15,7 +15,7 @@ export class RollerSetupComponent {
   
   forceBuilderForm = this.formBuilder.group({
       roster: [''],
-      battleValue : ['0', Validators.required, Validators.],
+      battleValue : ['0', Validators.required],
       battleValueTolerance: [''],
       baseSkillLevel:[''],
       allowOfficers: [''],
