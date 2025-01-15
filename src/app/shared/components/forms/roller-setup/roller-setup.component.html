@@ -1,0 +1,9 @@
+<div class="form-wrapper">
+    <h2>Force Generator Setup</h2>
+    <form [formGroup]="forceBuilderForm" (ngSubmit)="onSubmit()">
+        <label for="battleValue">Battle Value: </label>
+        <input  id="battleValue"  type="number" formControlName="battleValue" />
+        <p>Form Status: {{ forceBuilderForm.status }}</p>
+        <button type="submit" [disabled]="!forceBuilderForm.valid">Submit</button>
+    </form>
+</div>
