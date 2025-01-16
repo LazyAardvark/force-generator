@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
+import { NgIf } from '@angular/common';
 
 
 @Component({
@@ -14,7 +15,8 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatCardModule],
+    MatCardModule,
+    NgIf],
   templateUrl: './roller-setup.component.html',
    styleUrl: './roller-setup.component.css',
   
