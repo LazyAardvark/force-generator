@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'fg-header',
   imports: [],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.css'
 })
 export class HeaderComponent {
 

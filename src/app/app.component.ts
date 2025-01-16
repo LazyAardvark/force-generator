@@ -9,7 +9,7 @@ import { RollerSetupComponent } from "./shared/components/forms/roller-setup/rol
   selector: 'fg-root',
   imports: [FooterComponent, HeaderComponent, MainContentComponent, SidePanelComponent, RollerSetupComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.css'
 })
 export class AppComponent {
 }
