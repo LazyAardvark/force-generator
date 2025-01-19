@@ -1,13 +1,24 @@
 <div class="form-wrapper">
     <h2>Force Generator Setup</h2>
     <form [formGroup]="forceBuilderForm" (ngSubmit)="onSubmit()">
-
-        <mat-form-field appearance="fill">
-            <mat-label for="battleValue">Battle Value</mat-label>
-            <input id="battleValue" matInput formControlName="battleValue" placeholder="0" type="number" />
-            <mat-error *ngIf="forceBuilderForm.get('battleValue')?.hasError('required')">Battle Value is required</mat-error>
-          </mat-form-field>
-        <p>Form Status: {{ forceBuilderForm.status }}</p>
-        <button type="submit" [disabled]="!forceBuilderForm.valid">Submit</button>
+        <mat-card>
+            <mat-card-header></mat-card-header>
+            <mat-card-content>
+                <mat-form-field appearance="fill">
+                    <mat-label for="battleValue">Battle Value</mat-label>
+                    <input id="battleValue" matInput formControlName="battleValue" placeholder="0" type="number" />
+                    <mat-error *ngIf="forceBuilderForm.get('battleValue')?.hasError('required')">Battle Value is
+                        required</mat-error>
+                </mat-form-field>
+                <mat-checkbox appearance="fill" id="allowDuplicates" formControlName="allowDuplicates">Allow
+                    Duplicates</mat-checkbox>
+                <mat-checkbox appearance="fill" id="allowOfficers" formControlName="allowOfficers">Allow
+                    Officers</mat-checkbox>
+                <p  color="accent">Form Status: {{ forceBuilderForm.status }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button type="submit" [disabled]="!forceBuilderForm.valid">Submit</button>
+            </mat-card-actions>
+            </mat-card>
     </form>
 </div>

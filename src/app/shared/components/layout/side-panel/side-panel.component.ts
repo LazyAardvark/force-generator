@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'fg-side-panel',
   imports: [],
   templateUrl: './side-panel.component.html',
-  styleUrl: './side-panel.component.css'
+  styles: ''
 })
 export class SidePanelComponent {
 

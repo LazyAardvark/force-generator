@@ -18,7 +18,7 @@ import { NgIf } from '@angular/common';
     MatCardModule,
     NgIf],
   templateUrl: './roller-setup.component.html',
-   styleUrl: './roller-setup.component.css',
+  styles: '',
   
  
 })
