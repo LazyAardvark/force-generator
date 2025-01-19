@@ -4,21 +4,52 @@
         <mat-card>
             <mat-card-header></mat-card-header>
             <mat-card-content>
-                <mat-form-field appearance="fill">
-                    <mat-label for="battleValue">Battle Value</mat-label>
-                    <input id="battleValue" matInput formControlName="battleValue" placeholder="0" type="number" />
-                    <mat-error *ngIf="forceBuilderForm.get('battleValue')?.hasError('required')">Battle Value is
-                        required</mat-error>
-                </mat-form-field>
-                <mat-checkbox appearance="fill" id="allowDuplicates" formControlName="allowDuplicates">Allow
+                <div>
+                    <mat-form-field>
+                        <mat-label>Selection Roster</mat-label>
+                        <mat-select id="rosterSelect" formControlName="selectionRoster" required>
+                            <mat-option>--</mat-option>
+                            @for (roster of rosters; track roster) {
+                            <mat-option [value]="roster">{{roster}}</mat-option>
+                            }
+                        </mat-select>
+                        @if (forceBuilderForm.get('selectionRoster')?.hasError('required')) {
+                        <mat-error>Please choose a force roster</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label for="battleValue">Battle Value</mat-label>
+                        <input id="battleValue" matInput formControlName="battleValue" type="number" />
+                        @if (forceBuilderForm.get('battleValue')?.hasError('required')) {
+                        <mat-error>Battle Value isrequired</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-label>Base Gunnery Skill : </mat-label>
+                    <mat-label>{{forceBuilderForm.get('baseGunnerySkill')!.value}}</mat-label>
+                    <mat-slider min="1" max="5" step="1">
+                        <input id="gunnerySkillSet" matSliderThumb showTickMarks formControlName="baseGunnerySkill">
+                    </mat-slider>
+                </div>
+                <div>
+                    <mat-label>Base Piloting Skill : </mat-label>
+                    <mat-label>{{forceBuilderForm.get('basePilotingSkill')!.value}}</mat-label>
+                    <mat-slider min="1" max="5" step="1">
+                        <input id="pilotingSkillSet" matSliderThumb showTickMarks formControlName="basePilotingSkill">
+                    </mat-slider>
+                </div>
+                <mat-checkbox id="allowDuplicates" formControlName="allowDuplicates">Allow
                     Duplicates</mat-checkbox>
-                <mat-checkbox appearance="fill" id="allowOfficers" formControlName="allowOfficers">Allow
+                <mat-checkbox id="allowOfficers" formControlName="allowOfficers">Allow
                     Officers</mat-checkbox>
-                <p  color="accent">Form Status: {{ forceBuilderForm.status }}</p>
+                <p color="accent">Form Status: {{ forceBuilderForm.status }}</p>
             </mat-card-content>
             <mat-card-actions>
                 <button mat-flat-button type="submit" [disabled]="!forceBuilderForm.valid">Submit</button>
             </mat-card-actions>
-            </mat-card>
+        </mat-card>
     </form>
 </div>
