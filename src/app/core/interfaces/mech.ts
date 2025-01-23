@@ -4,10 +4,9 @@ import { UnitClass } from "../enums/unit-class";
 import { Unit } from "./unit";
 
 export interface Mech extends Unit{
-    chassis: String,
     variant: String,
     tonnage: number;
-    mechtype: MechType;
-    class: UnitClass
-    role: Role,
+    mechtype?: MechType;
+    class?: UnitClass
+    role?: Role,
 }

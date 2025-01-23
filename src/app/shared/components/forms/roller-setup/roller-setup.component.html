@@ -7,23 +7,22 @@
                 <div>
                     <mat-form-field>
                         <mat-label>Selection Roster</mat-label>
-                        <mat-select id="rosterSelect" formControlName="selectionRoster" required>
+                        <mat-select id="rosterSelect" formControlName="selectionRoster" (selectionChange)="this.onRosterChange($event)" required>
                             <mat-option>--</mat-option>
-                            @for (roster of rosters; track roster) {
-                            <mat-option [value]="roster">{{roster}}</mat-option>
-                            }
+                            <mat-option *ngFor="let roster of rosters" [value]="roster">{{roster.name}}</mat-option>
                         </mat-select>
                         @if (forceBuilderForm.get('selectionRoster')?.hasError('required')) {
                         <mat-error>Please choose a force roster</mat-error>
                         }
                     </mat-form-field>
+                    <fg-roller-roster-container></fg-roller-roster-container>
                 </div>
                 <div>
                     <mat-form-field>
                         <mat-label for="battleValue">Battle Value</mat-label>
                         <input id="battleValue" matInput formControlName="battleValue" type="number" />
                         @if (forceBuilderForm.get('battleValue')?.hasError('required')) {
-                        <mat-error>Battle Value isrequired</mat-error>
+                        <mat-error>Battle Value is required</mat-error>
                         }
                     </mat-form-field>
                 </div>

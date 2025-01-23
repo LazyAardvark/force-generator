@@ -1,0 +1,29 @@
+<table mat-table [dataSource]="dataSource().mechs" class="mat-elevation-z8">
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let mech"> {{mech.name}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="variant">
+      <th mat-header-cell *matHeaderCellDef> Variant </th>
+      <td mat-cell *matCellDef="let mech"> {{mech.variant}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="tonnage">
+      <th mat-header-cell *matHeaderCellDef> Tonnage </th>
+      <td mat-cell *matCellDef="let mech"> {{mech.tonnage}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="battlevalue">
+      <th mat-header-cell *matHeaderCellDef> Battle Value </th>
+      <td mat-cell *matCellDef="let mech"> {{mech.battleValue}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
