@@ -52,7 +52,7 @@ export class RollerSetupComponent{
   onSubmit() {
     const formValue = this.forceBuilderForm.value;
     console.log("Force Generator Configuration Value :", formValue);
-    this.rollerFacade.setRollTable(formValue);
+    this.rollerFacade.updateRollerTable(formValue);
   }
   onRosterChange(event : any){
     this.rollerFacade.setRoster(event.value);

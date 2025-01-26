@@ -1,11 +1,11 @@
 {
   "name" : "AGoAC",
   "mechs" :  [ 
-    {"name": "Locust", "variant" : "CT-1V", "tonnage": 20, "battleValue" : 432, "type" : "battlemech" },
-    {"name": "Locust", "variant" : "CT-1E", "tonnage": 20, "battleValue" : 553, "type" : "battlemech" },
-    {"name": "Locust", "variant" : "CT-1M", "tonnage": 20, "battleValue" : 424, "type" : "battlemech" },
-    {"name": "Locust", "variant" : "CT-1S", "tonnage": 20, "battleValue" : 440, "type" : "battlemech" },
-    {"name": "Locust", "variant" : "CT-3V", "tonnage": 20, "battleValue" : 490, "type" : "battlemech" },
+    {"name": "Locust", "variant" : "LCT-1V", "tonnage": 20, "battleValue" : 432, "type" : "battlemech" },
+    {"name": "Locust", "variant" : "LCT-1E", "tonnage": 20, "battleValue" : 553, "type" : "battlemech" },
+    {"name": "Locust", "variant" : "LCT-1M", "tonnage": 20, "battleValue" : 424, "type" : "battlemech" },
+    {"name": "Locust", "variant" : "LCT-1S", "tonnage": 20, "battleValue" : 440, "type" : "battlemech" },
+    {"name": "Locust", "variant" : "LCT-3V", "tonnage": 20, "battleValue" : 490, "type" : "battlemech" },
     {"name": "Commando", "variant" : "COM-1B", "tonnage": 25, "battleValue" : 616, "type" : "battlemech" },
     {"name": "Commando", "variant" : "COM-1C", "tonnage": 25, "battleValue" : 458, "type" : "battlemech" },
     {"name": "Commando", "variant" : "COM-1D", "tonnage": 25, "battleValue" : 558, "type" : "battlemech" },

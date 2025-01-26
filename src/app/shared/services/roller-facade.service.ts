@@ -12,10 +12,8 @@ export class RollerFacadeService {
   private rollerService = inject(RollerService)
   private rosters = toSignal(this.rosterService.get(), { initialValue: [] });
   private roster :  WritableSignal<Roster>;
-  private roller : WritableSignal<Roller>
   constructor (){
     this.roster = signal<Roster>(this.rosterService.getEmptyRoster());
-    this.roller = signal<Roller>(this.rollerService.getEmptyRoller())
   }
 
   getRosters(): Roster[] {
@@ -34,7 +32,7 @@ export class RollerFacadeService {
   getRosterSignal(): Signal<Roster> {
     return this.roster;
   }
-  setRollTable(formValues : any ) : void { 
+  updateRollerTable(formValues : any ) : void { 
     let formRoller : Roller = {
       selectionRoster: this.roster(),
       battleValue: formValues.battleValue,
@@ -44,9 +42,11 @@ export class RollerFacadeService {
       allowOfficers: formValues.allowOfficers,
       allowDuplicates: formValues.allowDuplicates,
     }
-    this.roller.set(formRoller);
+    this.rollerService.updateRoller(formRoller);
+    let rolled = this.rollerService.getRollTable();
+    this.rollerService.rollRoster();
   }
-  rollTable() : Roster {
-    return this.roster();
+  rollTable() : any {
+    return this.rollerService.getRollTable();
   }
 }
