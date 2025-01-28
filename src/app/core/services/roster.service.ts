@@ -5,12 +5,12 @@ import { AbstractDataService } from './abstract-data.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from "../../../environments/environment";
-import { Mech } from '../interfaces/mech';
+import { Unit } from '../interfaces/unit';
 
 
 export interface Roster {
     name: String,
-    mechs : Mech[]
+    mechs : Unit[]
 }
 
 @Injectable({
