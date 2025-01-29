@@ -42,8 +42,8 @@ export class RollerFacadeService {
       allowOfficers: formValues.allowOfficers,
       allowDuplicates: formValues.allowDuplicates,
     }
-    this.rollerService.updateRoller(formRoller);
-    let rolled = this.rollerService.getRollTable();
+    this.rollerService.setRoller(formRoller);
+    this.rollerService.setRollTable();
     this.rollerService.rollRoster();
   }
   rollTable() : any {

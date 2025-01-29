@@ -1,7 +1,7 @@
-import { computed, inject, Injectable, signal, Signal, WritableSignal } from '@angular/core';
+import { inject, Injectable, signal, Signal, WritableSignal } from '@angular/core';
 import { Roster, RosterService } from './roster.service';
-import { RollTable, UnitRollerEntity } from '../models/roll-table';
-import { Mech } from '../interfaces/mech';
+import { RolledRoster, RollTable, UnitRollerEntity } from '../models/roll-table';
+import { Unit } from '../interfaces/unit';
 
 export interface Roller {
   selectionRoster: Roster,
@@ -13,12 +13,6 @@ export interface Roller {
   allowDuplicates: boolean,
 }
 
-export interface RolledRoster {
-  name: string,
-  rolledUnits: UnitRollerEntity[],
-  battleValue: number,
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -26,13 +20,15 @@ export interface RolledRoster {
 export class RollerService {
 
   private rosterService = inject(RosterService);
-  private roller: WritableSignal<Roller>;
-  private rollTable: WritableSignal<RollTable>;
-  private rolledRoster: WritableSignal<Roster>;
+  private rollTable = inject(RollTable);
+  private rollerConfig: WritableSignal<Roller>;
+  private roster: WritableSignal<Roster>;
+  private rolledRoster: WritableSignal<RolledRoster>;
+
   constructor() {
-    this.roller = signal<Roller>(this.getEmptyRoller());
-    this.rollTable = signal<RollTable>({ roster: [] });
-    this.rolledRoster = signal<Roster>({ name: "None", mechs: [] });
+    this.rollerConfig = signal<Roller>(this.getEmptyRoller());
+    this.roster = signal<Roster>({ name: "None", mechs: [] });
+    this.rolledRoster = signal<RolledRoster>({ name: "None", rolledUnits: [], battleValue: 0 });
   }
 
   getEmptyRoller(): Roller {
@@ -47,53 +43,60 @@ export class RollerService {
     }
   }
   getRoller(): Signal<Roller> {
-    return this.roller;
+    return this.rollerConfig;
   }
 
-  getRollTable(): Signal<RollTable> {
-    this.rollTable.set(this.createRollTable());
-    console.log("Roller Signal is :");
-    console.log(this.rollTable());
-    return this.rollTable;
+  setRoller(formRoller: Roller) {
+    this.rollerConfig.set(formRoller);
   }
 
-  createRollTable(): RollTable {
-    let rollTable: RollTable = new RollTable();
-    let mechRoster: Mech[] = this.roller().selectionRoster.mechs;
+  getRoster(): Signal<Roster> {
+    return this.roster;
+  }
+
+  setRoster(roster: Roster) {
+    this.roster.set(roster);
+  }
+
+  getRolledRoster(): Signal<RolledRoster> {
+    return this.rolledRoster;
+  }
+
+  setRolledRoster(rolledRoster: RolledRoster) {
+    this.rolledRoster.set(rolledRoster);
+  }
+
+  getRollTable(): Signal<UnitRollerEntity[]> {
+    return signal(this.rollTable.getRollTable());
+  }
+
+  setRollTable(): void {
+    const unitRoster: Unit[] = this.rollerConfig().selectionRoster.mechs;
     const maxBV = this.getMaxBv();
-
-    for (let x in mechRoster) {
-      let additions: any[] = [];
+    const rollTable: UnitRollerEntity[] = [];
+    for (let x in unitRoster) {
+      let additions: UnitRollerEntity[] = [];
       let unit: UnitRollerEntity;
-      if (this.roller().allowOfficers) {
+      if (this.rollerConfig().allowOfficers) {
         //TODO add BV calculations
-        unit = { unit: mechRoster[x], gunnerySkill: this.roller().baseGunnerySkill - 1, pilotSkill: this.roller().basePilotingSkill - 1 }
+        unit = { unit: unitRoster[x], gunnerySkill: this.rollerConfig().baseGunnerySkill - 1, pilotSkill: this.rollerConfig().basePilotingSkill - 1 }
         additions.push(unit);
       }
       //TODO account for a range of skill values
-      unit = { unit: mechRoster[x], gunnerySkill: this.roller().baseGunnerySkill, pilotSkill: this.roller().basePilotingSkill };
+      unit = { unit: unitRoster[x], gunnerySkill: this.rollerConfig().baseGunnerySkill, pilotSkill: this.rollerConfig().basePilotingSkill };
       additions.push(unit);
       for (let y in additions) {
         if (additions[y].unit.battleValue < maxBV)
-          rollTable.roster.push(additions[y]);
+          rollTable.push(additions[y]);
       }
     }
-    console.log(rollTable);
-    return rollTable;
-  }
-
-  updateRoller(formRoller: Roller) {
-    this.roller.set(formRoller);
+    this.rollTable.setRollTable(rollTable);
   }
 
   private getMaxBv(): number {
     let maxBV = 0;
-    maxBV = this.roller().battleValueTolerance ? (this.roller().battleValue + Math.abs(this.roller().battleValueTolerance)) : this.roller().battleValue
+    maxBV = this.rollerConfig().battleValueTolerance ? (this.rollerConfig().battleValue + Math.abs(this.rollerConfig().battleValueTolerance)) : this.rollerConfig().battleValue
     return maxBV;
-  }
-
-  getRolledRoster(): Signal<Roster> {
-    return this.rolledRoster;
   }
 
   rollRoster(): void {
@@ -110,31 +113,27 @@ export class RollerService {
         newRoster.battleValue = newRoster.battleValue + unit.unit.battleValue;
       }
       this.pruneRollRoster(maxBv - newRoster.battleValue);
-      if (this.rollTable().roster.length == 0) {
-        break
+      if (this.rollTable.getRollTable().length == 0) {
+        break;
       }
     }
-    console.log(newRoster);
-
+    console.log(newRoster)
+    this.setRolledRoster(newRoster);
   }
 
   private getUnitFromRoller(): UnitRollerEntity {
-    const randomIndex = Math.floor(Math.random() * this.rollTable().roster.length);
-    return this.rollTable().roster[randomIndex];
+    const randomIndex = Math.floor(Math.random() * (this.rollTable.getRollTable().length));
+    const unit : UnitRollerEntity = this.rollTable.getRollTable()[randomIndex];
+    return unit;
   }
 
   private pruneRollRoster(maxBv: number): void {
-    let newRoster: UnitRollerEntity[] = this.rollTable().roster;
+    let newRoster: UnitRollerEntity[] = this.rollTable.getRollTable();
     newRoster.forEach((unit, index) => {
       if (unit.unit.battleValue > maxBv) {
         newRoster.splice(index, 1);
       }
     });
-    this.rollTable.set({
-      roster: newRoster
-    })
+    this.rollTable.setRollTable(newRoster)
   }
-
-
-
 }
