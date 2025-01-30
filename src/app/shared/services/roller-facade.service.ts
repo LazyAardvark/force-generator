@@ -2,6 +2,7 @@ import { inject, Injectable, signal, Signal, WritableSignal } from '@angular/cor
 import { Roster, RosterService } from '../../core/services/roster.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Roller, RollerService } from '../../core/services/roller.service';
+import { RolledRoster } from '../../core/interfaces/rolled-roster';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,14 @@ export class RollerFacadeService {
   private rollerService = inject(RollerService)
   private rosters = toSignal(this.rosterService.get(), { initialValue: [] });
   private roster :  WritableSignal<Roster>;
+  private rolledRoster :  WritableSignal<RolledRoster>;
   constructor (){
     this.roster = signal<Roster>(this.rosterService.getEmptyRoster());
+    this.rolledRoster = signal<RolledRoster>({
+      name: '',
+      rolledUnits: [],
+      battleValue: 0
+    });
   }
 
   getRosters(): Roster[] {
@@ -43,10 +50,12 @@ export class RollerFacadeService {
       allowDuplicates: formValues.allowDuplicates,
     }
     this.rollerService.setRoller(formRoller);
-    this.rollerService.setRollTable();
-    this.rollerService.rollRoster();
+    this.rollTable();
   }
-  rollTable() : any {
-    return this.rollerService.getRollTable();
+  rollTable() : void {
+    this.rolledRoster.set(this.rollerService.rollRoster());
+  }
+  getRolledRoster() : Signal<RolledRoster> {
+    return this.rolledRoster;
   }
 }
