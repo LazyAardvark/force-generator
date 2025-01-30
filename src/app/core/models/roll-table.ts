@@ -32,7 +32,8 @@ export class RollTable {
     }
   }
 
-  rollRoster(): RolledRoster {
+  rollRoster(rollerConfig : Roller): RolledRoster {
+    let tempRollTable = this.rollTable;
     let newRoster: RolledRoster = {
       name: '',
       rolledUnits: [],
@@ -40,13 +41,17 @@ export class RollTable {
     };
     let maxBv: number = this.maxBv;
     while (newRoster.battleValue < maxBv) {
-      let unit: UnitRollerEntity = this.getUnitFromRollTable();
+      let unit: UnitRollerEntity = this.getUnitFromRollTable(tempRollTable);
+      console.log(tempRollTable)
       if ((newRoster.battleValue + unit.adjustedBattleValue) < maxBv) {
         newRoster.rolledUnits.push(unit);
+        if(!rollerConfig.allowDuplicates){
+          tempRollTable = this.pruneRollRosterDuplicate(tempRollTable, unit.unit.name);
+        }
         newRoster.battleValue = newRoster.battleValue + unit.adjustedBattleValue;
       }
-      this.pruneRollRoster(maxBv - newRoster.battleValue);
-      if (this.rollTable.length == 0) {
+      tempRollTable = this.pruneRollRosterbyBv(tempRollTable, maxBv - newRoster.battleValue);
+      if (tempRollTable.length == 0) {
         break;
       }
     }
@@ -54,22 +59,33 @@ export class RollTable {
     return newRoster;
   }
 
-  private pruneRollRoster(maxBv: number): void {
-    let newRoster: UnitRollerEntity[] = this.rollTable;
+  private pruneRollRosterDuplicate(rollTable : UnitRollerEntity[], name: String):  UnitRollerEntity[] {
+    let newRoster: UnitRollerEntity[] = rollTable;
     newRoster.forEach((unit, index) => {
-      if (unit.unit.battleValue > maxBv) {
+      if (unit.unit.name == name) {
         newRoster.splice(index, 1);
       }
     });
+    return newRoster;
+  }
+
+  private pruneRollRosterbyBv(rollTable : UnitRollerEntity[], maxBv: number):  UnitRollerEntity[] {
+    let newRoster: UnitRollerEntity[] = rollTable;
+    newRoster.forEach((unit, index) => {
+      if (unit.adjustedBattleValue > maxBv) {
+        newRoster.splice(index, 1);
+      }
+    });
+    return newRoster;
   }
 
   private createUnitForRollTable(unit : Unit, gunnery : number, piloting : number) : UnitRollerEntity {
     return this.unitRollerFactory.getUnitRollerEntity(unit, gunnery, piloting)
   }
 
-  private getUnitFromRollTable(): UnitRollerEntity {
-    const randomIndex = Math.floor(Math.random() * (this.rollTable.length));
-    const unit : UnitRollerEntity = this.rollTable[randomIndex];
+  private getUnitFromRollTable(rollTable : UnitRollerEntity[] ): UnitRollerEntity {
+    const randomIndex = Math.floor(Math.random() * (rollTable.length));
+    const unit : UnitRollerEntity = rollTable[randomIndex];
     return unit;
   }
   

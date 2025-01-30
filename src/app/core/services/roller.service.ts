@@ -72,7 +72,7 @@ export class RollerService {
   }
 
   rollRoster(): RolledRoster {
-    return this.rollTable.rollRoster();
+    return this.rollTable.rollRoster(this.rollerConfig());
   }
 
 }
