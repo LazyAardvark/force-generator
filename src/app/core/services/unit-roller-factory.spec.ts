@@ -1,7 +1,8 @@
-import { UnitRollerEntity } from './unit-roller-factory';
+import { UnitRollerEntity } from "../interfaces/unit-roller-entity";
+import { UnitRollerFactory } from "./unit-roller-factory";
 
 describe('UnitRollerEntity', () => {
   it('should create an instance', () => {
-    expect(new UnitRollerEntity()).toBeTruthy();
+    expect(new UnitRollerFactory()).toBeTruthy();
   });
 });

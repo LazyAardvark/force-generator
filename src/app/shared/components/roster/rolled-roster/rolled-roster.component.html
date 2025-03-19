@@ -1,0 +1,35 @@
+<table mat-table [dataSource]="dataSource().rolledUnits" class="mat-elevation-z8">
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let mech"> {{mech.unit.name}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="variant">
+      <th mat-header-cell *matHeaderCellDef> Variant </th>
+      <td mat-cell *matCellDef="let mech"> {{mech.unit.variant}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="gunnerySkill">
+      <th mat-header-cell *matHeaderCellDef> Gunnery </th>
+      <td mat-cell *matCellDef="let mech"> {{mech.gunnerySkill}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="pilotSkill">
+        <th mat-header-cell *matHeaderCellDef> Piloting </th>
+        <td mat-cell *matCellDef="let mech"> {{mech.pilotSkill}} </td>
+      </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="battlevalue">
+      <th mat-header-cell *matHeaderCellDef> Battle Value </th>
+      <td mat-cell *matCellDef="let mech"> {{mech.adjustedBattleValue}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

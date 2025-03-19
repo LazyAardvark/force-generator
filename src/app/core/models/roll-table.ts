@@ -1,7 +1,8 @@
 import { inject, Injectable } from "@angular/core";
 import { Unit } from "../interfaces/unit";
 import { Roller } from "../services/roller.service";
-import { UnitRollerEntity, UnitRollerFactory } from "../services/unit-roller-factory";
+import { UnitRollerFactory } from "../services/unit-roller-factory";
+import { UnitRollerEntity } from "../interfaces/unit-roller-entity";
 import { RolledRoster } from "../interfaces/rolled-roster";
 
 @Injectable({

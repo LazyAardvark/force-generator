@@ -5,7 +5,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'fg-main-content',
   imports: [RouterOutlet],
   templateUrl: './main-content.component.html',
-  styles: ''
+  styles: 'main{margin:2rem}'
 })
 export class MainContentComponent {
 

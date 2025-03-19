@@ -1,12 +1,13 @@
 <div class="layout-container">
   <fg-header></fg-header>
-  <div class="main-content">
-    <fg-side-panel></fg-side-panel>
-    <div class="content-area">
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav  [opened]="this.sidenavService.isOpen()" #snav [mode]="this.breakpointService.isMobile() ? 'over' : 'side'" [fixedInViewport]="this.breakpointService.isMobile()" fixedTopGap="56">
+        <fg-side-panel></fg-side-panel>
+    </mat-sidenav>
+    <mat-sidenav-content>
       <fg-main-content></fg-main-content>
-      <fg-roller-setup></fg-roller-setup>   
-     </div>
-  </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
   <fg-footer></fg-footer>
 </div>
 

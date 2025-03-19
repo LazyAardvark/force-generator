@@ -1,4 +1,4 @@
-import { UnitRollerEntity } from "../services/unit-roller-factory";
+import { UnitRollerEntity } from "../interfaces/unit-roller-entity";
 
 export interface RolledRoster {
     name: string,

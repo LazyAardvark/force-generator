@@ -9,7 +9,6 @@ import { MatSliderModule } from '@angular/material/slider';
 import { Roster } from '../../../../core/services/roster.service';
 import { RollerFacadeService } from '../../../services/roller-facade.service';
 import { NgFor } from '@angular/common';
-import { RollerRosterContainerComponent } from "../../roster/roller-roster-container/roller-roster-container.component";
 
 
 @Component({
@@ -21,11 +20,9 @@ import { RollerRosterContainerComponent } from "../../roster/roller-roster-conta
     MatCheckboxModule,
     MatCardModule,
     MatSliderModule,
-    NgFor, RollerRosterContainerComponent],
+    NgFor],
   templateUrl: './roller-setup.component.html',
   styles: '',
-
-
 })
 
 export class RollerSetupComponent{

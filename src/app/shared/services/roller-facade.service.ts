@@ -55,7 +55,7 @@ export class RollerFacadeService {
   rollTable() : void {
     this.rolledRoster.set(this.rollerService.rollRoster());
   }
-  getRolledRoster() : Signal<RolledRoster> {
+  getRolledRosterSignal() : Signal<RolledRoster> {
     return this.rolledRoster;
   }
 }

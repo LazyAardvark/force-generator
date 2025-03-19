@@ -1,19 +1,16 @@
 import { inject, Injectable } from "@angular/core";
 import { Unit } from "../interfaces/unit"
 import { BattleValueService } from "./battle-value.service";
+import { UnitRollerEntity } from "../interfaces/unit-roller-entity";
 
-export interface UnitRollerEntity {
-    unit: Unit;
-    gunnerySkill: number;
-    pilotSkill: number;
-    adjustedBattleValue: number;
-}
+
 
 @Injectable({
     providedIn: 'root'
   })
 export class UnitRollerFactory {
-    constructor(private battleValueService: BattleValueService) {
+    private battleValueService = inject(BattleValueService);
+    constructor() {
     }
     getUnitRollerEntity(unit : Unit, gunnerySkill : number, pilotSkill: number): UnitRollerEntity {
         return {
@@ -24,3 +21,4 @@ export class UnitRollerFactory {
         }
     }
 };
+
