@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'fg-main-content',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ],
   templateUrl: './main-content.component.html',
   styles: 'main{margin:2rem}'
 })
 export class MainContentComponent {
-
+  title = 'routing-app';
 }

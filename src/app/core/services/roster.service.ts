@@ -20,9 +20,9 @@ export interface Roster {
 export class RosterService extends AbstractDataService<Roster> {
   private readonly baseUrl = '/api/rosters';
   private readonly useMocks = environment.useMockData;
-
   private readonly mockData : Roster[] = [noneMockRoster, mockAgoacRoster, ]
   private http = inject(HttpClient);
+  
   constructor() {
     super();
   }

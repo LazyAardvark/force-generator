@@ -1,0 +1,7 @@
+{
+    "roller": true,
+    "mechs":true,
+    "roster": true,
+    "login": false,
+    "user": false
+  }
