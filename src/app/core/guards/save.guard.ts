@@ -1,5 +1,15 @@
 import { CanDeactivateFn } from '@angular/router';
+import { CanComponentDeactivate } from '../interfaces/can-component-deactivate';
 
-export const saveGuard: CanDeactivateFn<unknown> = (component, currentRoute, currentState, nextState) => {
-  return true;
+export const saveGuard: CanDeactivateFn<CanComponentDeactivate> = (component: CanComponentDeactivate, currentRoute, currentState, nextState) => {
+  return component.canDeactivate ? component.canDeactivate() : true;
 };
+
+
+/**
+ * {
+  path: 'edit-profile',
+  component: EditProfileComponent,
+  canDeactivate: [PendingChangesGuard]
+}
+ */

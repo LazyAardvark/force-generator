@@ -64,9 +64,9 @@ export class AuthService {
     return token ? jwtDecode(token) : null;
   }
 
-  getRole(): any | null {
+  getRole(): String{
     const user = this.getUser();
-    return user.role;
+    return <String>user.role;
   }
 
   /** ✅ Check if user has a specific role */

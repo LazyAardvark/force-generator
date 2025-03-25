@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { featureFlagGuard } from './core/guards/feature-flag.guard';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,12 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/rosters/rosters.component')
             .then( mod => mod.RostersComponent),
         canActivate: [AuthGuard]
+    },
+    { 
+        path: "user",
+        loadComponent: () => import('./pages/user/user.component')
+            .then( mod => mod.UserComponent),
+        canActivate: []
     },
     {
         path: '**', 

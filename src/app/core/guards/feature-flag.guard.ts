@@ -1,5 +1,11 @@
-import { CanActivateFn } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { FeatureFlagService } from '../services/feature-flag/feature-flag.service';
 
-export const featureFlagGuard: CanActivateFn = (route, state) => {
-  return true;
+export function featureFlagGuard(flagName: string): CanActivateFn {
+  return () => {
+  const featureFlagsService: FeatureFlagService = inject(FeatureFlagService);
+
+  return featureFlagsService.isFeatureEnabled(flagName)
+  }
 };
