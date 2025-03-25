@@ -1,7 +1,7 @@
 import { CanDeactivateFn } from '@angular/router';
 import { CanComponentDeactivate } from '../interfaces/can-component-deactivate';
 
-export const saveGuard: CanDeactivateFn<CanComponentDeactivate> = (component: CanComponentDeactivate, currentRoute, currentState, nextState) => {
+export const SaveGuard: CanDeactivateFn<CanComponentDeactivate> = (component: CanComponentDeactivate, currentRoute, currentState, nextState) => {
   return component.canDeactivate ? component.canDeactivate() : true;
 };
 

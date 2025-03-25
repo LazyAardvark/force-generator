@@ -17,10 +17,10 @@ export class LoaderDirective {
   private showLoader(condition : boolean) {
     if (condition) {
       this.viewContainerRef.clear();
-      this.viewContainerRef.createComponent(LoadComponent);
+      this.viewContainerRef.createEmbeddedView(this.templateRef);
     } else if (!condition) {
       this.viewContainerRef.clear();
-      this.viewContainerRef.createEmbeddedView(this.templateRef);
+      this.viewContainerRef.createComponent(LoadComponent);
     }
   }
 }

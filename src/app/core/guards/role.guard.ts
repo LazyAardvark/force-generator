@@ -2,7 +2,7 @@ import { CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 import { inject } from '@angular/core';
 
-export function roleGuard(expectedRole: string) : CanActivateFn {
+export function RoleGuard(expectedRole: string) : CanActivateFn {
    return() => {
     const userRole: AuthService = inject(AuthService);
     const router: Router = inject(Router);
@@ -15,7 +15,7 @@ export function roleGuard(expectedRole: string) : CanActivateFn {
   }
 };
 
-export function roleChildGuard(expectedRole: string) : CanActivateChildFn {
+export function RoleChildGuard(expectedRole: string) : CanActivateChildFn {
   return() => {
    const userRole: AuthService = inject(AuthService);
    const router: Router = inject(Router);
@@ -28,7 +28,7 @@ export function roleChildGuard(expectedRole: string) : CanActivateChildFn {
  }
 };
 
-export const adminGuard: CanActivateFn = () => {
+export const AdminGuard: CanActivateFn = () => {
   const userRole: AuthService = inject(AuthService);
   const router: Router = inject(Router);
   if (userRole.getRole().toLowerCase() == "admin") {
@@ -39,7 +39,7 @@ export const adminGuard: CanActivateFn = () => {
   }
 };
 
-export const adminChildGuard: CanActivateChildFn = () => {
+export const AdminChildGuard: CanActivateChildFn = () => {
     const userRole: AuthService = inject(AuthService);
     const router: Router = inject(Router);
     if (userRole.getRole().toLowerCase() == "admin") {
