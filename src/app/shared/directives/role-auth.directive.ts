@@ -1,5 +1,4 @@
 import { Directive, inject, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-import { FeatureFlagService } from '../../core/services/feature-flag/feature-flag.service';
 import { AuthService } from '../../core/services/auth/auth.service';
 
 @Directive({
@@ -7,13 +6,16 @@ import { AuthService } from '../../core/services/auth/auth.service';
 })
 export class RoleAuthDirective {
   
-  @Input() roll !: string;
+  @Input({ required: true })
+     set fgRoleAuth(role : string) {
+      this.check(role);
+     }; 
   private authService: AuthService = inject(AuthService);
   private templateRef = inject(TemplateRef);
   private viewContainer = inject(ViewContainerRef);
   
-  ngOnInit() {
-    if (this.authService.hasRole(this.roll) ) {
+  private check(role: string) {
+    if (this.authService.hasRole(role) ) {
       this.viewContainer.createEmbeddedView(this.templateRef);
     } else {
       this.viewContainer.clear();

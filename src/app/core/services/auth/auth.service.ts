@@ -5,7 +5,6 @@ import { BehaviorSubject, catchError, map, Observable, of, throwError } from 'rx
 import { jwtDecode } from 'jwt-decode';
 import { environment } from '../../../../environments/environment';
 import { toSignal } from '@angular/core/rxjs-interop';
-
 interface AuthResponse {
   accessToken: string;
   refreshToken: string;
@@ -69,7 +68,6 @@ export class AuthService {
     return <String>user.role;
   }
 
-  /** ✅ Check if user has a specific role */
   hasRole(role: string): boolean {
     const user = this.getUser();
     return user && user.role === role;

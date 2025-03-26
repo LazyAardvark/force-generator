@@ -6,15 +6,15 @@
         <a routerLink="/random-roller" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="this.sidenavService.close()">Force Roller</a>
     </mat-list-item>
     <mat-list-item> 
-        <a routerLink="/mechs" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="this.sidenavService.close()">Mechs</a>
+        <a routerLink="/mechs" *fgFeatureFlag="'mechs'" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="this.sidenavService.close()">Mechs</a>
     </mat-list-item>
     <mat-list-item> 
-        <a routerLink="rosters" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="this.sidenavService.close()">Rosters</a>
+        <a routerLink="rosters" *fgFeatureFlag="'rosters'" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="this.sidenavService.close()">Rosters</a>
     </mat-list-item>
     <mat-list-item> 
         <a routerLink="/user" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="this.sidenavService.close()">User</a>
     </mat-list-item>
-    <mat-list-item> 
-        <a routerLink="/admin" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="this.sidenavService.close()">Admin</a>
+    <mat-list-item *fgRoleAuth="'admin'"> 
+        <a routerLink="/admin"  routerLinkActive="active" ariaCurrentWhenActive="page" (click)="this.sidenavService.close()"> Admin </a>
     </mat-list-item>
 </mat-nav-list>

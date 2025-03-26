@@ -40,6 +40,7 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/user/user.component')
             .then(mod => mod.UserComponent),
         canLoad: [FeatureFlagGuard("user")],
+        canActivateChild: [FeatureFlagGuard("user")],
         children: [
             {
                 path: "login",
