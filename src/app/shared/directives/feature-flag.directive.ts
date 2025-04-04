@@ -1,4 +1,4 @@
-import { Directive, inject, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, inject, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { FeatureFlagService } from '../../core/services/feature-flag/feature-flag.service';
 
 @Directive({

@@ -19,7 +19,7 @@
                 <div>
                     <mat-form-field>
                         <mat-label for="battleValue">Battle Value</mat-label>
-                        <input id="battleValue" matInput formControlName="battleValue" type="number" />
+                        <input id="battleValue" matInput formControlName="battleValue" type="number" fgNumberOnly />
                         @if (forceBuilderForm.get('battleValue')?.hasError('required')) {
                         <mat-error>Battle Value is required</mat-error>
                         }
