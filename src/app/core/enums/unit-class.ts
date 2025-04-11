@@ -1,4 +1,5 @@
 export enum UnitClass {
+    none = "N/A",
     ultralight = "Ultralight",
     light = "Light",
     medium = "Medium",

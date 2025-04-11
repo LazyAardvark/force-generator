@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MechCreationComponent } from './mech-creation.component';
+import { MechCreationComponent } from './mech-create.component';
 
 describe('MechCreationComponent', () => {
   let component: MechCreationComponent;

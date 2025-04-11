@@ -3,8 +3,6 @@ import { Unit } from "../interfaces/unit"
 import { BattleValueService } from "./battle-value.service";
 import { UnitRollerEntity } from "../interfaces/unit-roller-entity";
 
-
-
 @Injectable({
     providedIn: 'root'
   })

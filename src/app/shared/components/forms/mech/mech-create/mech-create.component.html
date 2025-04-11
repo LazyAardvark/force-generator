@@ -1,0 +1,42 @@
+<div class="form-wrapper">
+    <h2>Mech Manager</h2>
+    <form [formGroup]="mechManagerForm" (ngSubmit)="onSubmit()">
+        <mat-card>
+            <mat-card-header></mat-card-header>
+            <mat-card-content>
+                <div class="flex flex-row">
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label for="battleValue">Battle Value</mat-label>
+                        <input id="battleValue" matInput formControlName="battleValue" type="number" fgNumberOnly />
+                        @if (mechManagerForm.get('battleValue')?.hasError('required')) {
+                        <mat-error>Battle Value is required</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-label>Base Gunnery Skill : </mat-label>
+                    <mat-label>{{mechManagerForm.get('baseGunnerySkill')!.value}}</mat-label>
+                    <mat-slider min="1" max="5" step="1">
+                        <input id="gunnerySkillSet" matSliderThumb showTickMarks formControlName="baseGunnerySkill">
+                    </mat-slider>
+                </div>
+                <div>
+                    <mat-label>Base Piloting Skill : </mat-label>
+                    <mat-label>{{mechManagerForm.get('basePilotingSkill')!.value}}</mat-label>
+                    <mat-slider min="1" max="5" step="1">
+                        <input id="pilotingSkillSet" matSliderThumb showTickMarks formControlName="basePilotingSkill">
+                    </mat-slider>
+                </div>
+                <mat-checkbox id="allowDuplicates" formControlName="allowDuplicates">Allow
+                    Duplicates</mat-checkbox>
+                <mat-checkbox id="allowOfficers" formControlName="allowOfficers">Allow
+                    Officers</mat-checkbox>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button type="submit" [disabled]="!mechManagerForm.valid">Submit</button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+</div>

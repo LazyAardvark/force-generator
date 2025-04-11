@@ -44,13 +44,12 @@ export class RollerSetupComponent{
     allowDuplicates: [''],
   });
 
-
-
   onSubmit() {
     const formValue = this.forceBuilderForm.value;
     console.log("Force Generator Configuration Value :", formValue);
     this.rollerFacade.updateRollerTable(formValue);
   }
+  
   onRosterChange(event : any){
     this.rollerFacade.setRoster(event.value);
   }
